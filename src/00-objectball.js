@@ -112,7 +112,16 @@ function homeTeamName(){
     return obj ['home']['teamName']
 }
 
-console.log(homeTeamName())
+const homeTeam = homeTeamName()
+
+function awayTeamName(){
+    let obj = gameObject()
+    return obj['away']['teamName']
+}
+
+const awayTeam = awayTeamName()
+
+// console.log(homeTeamName())
 
 function numPointsScored(name){
     // let game = gameObject();
@@ -139,6 +148,8 @@ function numPointsScored(name){
         }
     }
 
+// console.log(numPointsScored('DeSagna Diop'))
+
 function shoeSize(name){
     const data = gameObject()
     for (let potato in data) {
@@ -149,6 +160,8 @@ function shoeSize(name){
         }
     }
 }
+
+// console.log(shoeSize('Ben Gordon'))
 
 function findPlayer(name){
     let player
@@ -166,7 +179,84 @@ function findPlayer(name){
 function teamColors(name){
     const data = gameObject()
     for (let key in data){
-        if (data[key].teamName === name)
-        return data[key].colors
+        if (data[key].teamName === name){
+            return data[key].colors
+        }
+    }
+}
+
+// console.log(teamColors('Brooklyn Nets'))
+
+function teamNames(){
+    const data = gameObject()
+    let i = []
+    for (let key in data){
+            i.push(data[key].teamName)
+        }
+    return i 
+}
+
+// console.log(teamNames())
+
+function playerNumbers(name){
+    // return array of jersey numbers for that team
+    const data = gameObject()
+    let i = []
+    for (let key in data){
+        if (data[key].teamName === name){
+            for (let num in data[key].players){
+                i.push(data[key].players[num].number)
+            }
+        }
+    }
+    return i 
+}
+
+function playerStats(name){
+    // return object of that player's stats
+    const data = gameObject()
+    for (let team in data) {
+        for (let key in data[team].players){
+            if (key === name){
+                console.log(data[team].players[key].points)
+                return data[team].players[key]
+            }
+        }
+    }
+}
+
+function mostPointsScored(){
+    //which player has the most points?
+    const data = gameObject()
+    let playerPoints
+    for (let team in data){
+        for (let key in data[team].players){
+            console.log(data[team].players[key])
+            playerPoints = data[team].players[key].points
+        }
+    }
+}
+
+function totalPoints(name){
+    // return array of jersey numbers for that team
+    const data = gameObject()
+    let i = []
+    for (let key in data){
+        if (data[key].teamName === name){
+            for (let num in data[key].players){
+                i.push(data[key].players[num].points)
+            }
+        }
+    }
+    p = i.reduce( (a,n) => a + n )
+    return p
+}
+
+function winningTeam(){
+    if (totalPoints(homeTeamName()) > totalPoints(awayTeamName())){
+        return homeTeamName()
+    }
+    else {
+        return awayTeamName()
     }
 }
