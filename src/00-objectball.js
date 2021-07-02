@@ -170,3 +170,13 @@ function teamColors(name){
         return data[key].colors
     }
 }
+
+const homeJerseyNumbers = function (){
+    const data = gameObject();
+    let newArray = [];
+    let meetInnerValue = Object.values(data.home.players);
+    newArray.push(meetInnerValue.map((element) => {return element = element.number})
+    )
+    return newArray
+}
+console.log(homeJerseyNumbers)
